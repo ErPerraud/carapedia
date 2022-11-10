@@ -15,10 +15,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <p>Powered by PokéAPI</p>
+            <img src={logo} className="App-logo" alt="logo" />
+            <p>Powered by PokéAPI</p>
       </header>
-
       <Cards />
     </div>
   );

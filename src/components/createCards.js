@@ -1,5 +1,6 @@
 import { Pokemon } from "./Pokemon"
 import { Card } from "./Card"
+import React from 'react';
 
 
 export async function createPokemonCards(pokemons, limit, offset) {
@@ -18,8 +19,7 @@ export async function createPokemonCards(pokemons, limit, offset) {
 
             for(let i = 0 ; i < limit ; i++) {
 
-                let imgSprite = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"+pokemons[i].id+".png";
-                <Card name="pokemons[i].name" img="imgSprite" id="pokemons[i].id" />
+                <Card name={pokemons[i].name} id={pokemons[i].id}/>
             }
         });
 }

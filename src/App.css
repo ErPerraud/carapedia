@@ -51,8 +51,7 @@
 
 
 .Poke-art {
-  height: 60%;
-  width: 60%;
+  height: 20vmin
 }
 
 @keyframes App-logo-spin {
