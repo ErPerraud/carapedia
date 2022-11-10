@@ -1,25 +1,17 @@
-import logo from './assets/imgs/PokedexLogo.png';
-import './App.css';
-import Cards from './components/Cards';
-import { Pokemon, Pokemons } from './components/Pokemon';
-import { createPokemonCards } from './components/createCards';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Caracteristiques from "./pages/Caracterisiques";
+import Home from './pages/Home';
 
 
 function App() {
-  let pokemons = new Pokemons();
-  let offset = 0;
-  let limit = 905;
-
-  createPokemonCards(pokemons, limit, offset);
 
   return (
-    <div className="App">
-      <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>Powered by PokéAPI</p>
-      </header>
-      <Cards />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/pokemon' element={<Caracteristiques />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
