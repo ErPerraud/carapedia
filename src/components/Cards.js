@@ -1,7 +1,5 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { createPokemonCards } from './createCards';
-import { Pokemons } from './Pokemon';
 import { Card } from './Card';
 
 

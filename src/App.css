@@ -4,6 +4,7 @@ body {
 
 .App {
   text-align: center;
+  color: white;
 }
 
 .App-logo {
@@ -31,7 +32,8 @@ body {
 }
 
 .App-link {
-  color: #61dafb;
+  color: white;
+  text-decoration: none;
 }
 
 .App-cards {
@@ -56,8 +58,10 @@ body {
 
 
 .Poke-art {
-  height: 20vmin
+  height: 20vmin;
 }
+
+
 
 @keyframes App-logo-spin {
   from {
