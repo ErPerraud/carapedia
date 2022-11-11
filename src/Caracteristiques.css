@@ -1,0 +1,45 @@
+body {
+  background-color: #151515;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.App-link {
+  color: white;
+  text-decoration: none;
+}
+
+.Poke-art_carac {
+  height: 40vmin;
+}
+
+.Pokemon {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+  margin-top: 5%;
+}
+
+.Caracteristiques {
+  height: 100%;
+  width: 50%;
+  padding: 5% 5% 5% 5%;
+  border-radius: 70px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  background-color: #252555;
+}
+
+.retour {
+  margin-top: 2%;
+  font-size: x-large;
+  background-color: #252525;
+}
