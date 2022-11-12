@@ -7,7 +7,7 @@ const Cards = () => {
 
     const [data, setData] = useState([]);
     useEffect(() => {
-        axios.get("https://pokeapi.co/api/v2/pokemon?limit=1154&offset=0")
+        axios.get("https://pokeapi.co/api/v2/pokemon?limit=905&offset=0")
             .then((res) => setData(res.data.results));
     }, []);
 

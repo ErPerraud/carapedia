@@ -61,6 +61,11 @@ body {
   height: 20vmin;
 }
 
+.Poke-type {
+  height: 3vmin;
+  margin-right: 5%;
+}
+
 
 
 @keyframes App-logo-spin {
