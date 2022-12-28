@@ -3,6 +3,9 @@ import React, { useEffect, useState, useRef } from "react";
 import {useParams} from "react-router-dom";
 import "../Caracteristiques.css";
 
+import added from '../assets/imgs/AddedToFav.png';
+import add from '../assets/imgs/removedFromFav.png';
+
 // Images imports
 import bug from "../assets/imgs/types/bug.png";
 import dark from "../assets/imgs/types/dark.png";
@@ -24,17 +27,22 @@ import shadow from "../assets/imgs/types/shadow.png";
 import steel from "../assets/imgs/types/steel.png";
 import unknown from "../assets/imgs/types/unknown.png";
 import water from "../assets/imgs/types/water.png";
+import Store from "../redux/store";
 
 
 
 
-const Caracteristiques = () => {
+const Caracteristiques = (props) => {
 
     const {pokeId} = useParams();
+
+    const store = useRef(props.prop1);
 
     let abilities = useRef("");
 
     let moves = useRef(new Map());
+
+    let selected = useRef("");
 
     // We take the fact that all pokemon has 2 types maximum
     let type1 = useRef(undefined);
@@ -42,6 +50,32 @@ const Caracteristiques = () => {
 
     // The variable that contains the moves' table
     let tableMoves = useRef(undefined);
+
+    const changeImg = (event) => {
+        if(event.currentTarget.src == "http://localhost:3000" + add) {
+            event.currentTarget.src = added;
+            store.current.dispatch(data.name, 'ADD');
+            if(sessionStorage.getItem('store') != null) {
+                sessionStorage.setItem('store', sessionStorage.getItem('store') + data.name + ";");
+            }
+            else {
+                sessionStorage.setItem('store', data.name + ";");
+            }
+        }
+        else if(event.currentTarget.src == "http://localhost:3000" + added) {
+            event.currentTarget.src = add;
+            store.current.dispatch(data.name, 'SUBSTRACT');
+            let arrayFav = sessionStorage.getItem('store').split(";");
+            sessionStorage.setItem('store', "");
+            arrayFav.forEach(element => {
+                if(element != data.name && element != "") {
+
+                    sessionStorage.setItem('store', sessionStorage.getItem('store') + element + ";");
+                }
+            });
+        }
+        
+    }
 
     const [data, setData] = useState([]);
     useEffect(() => {
@@ -56,8 +90,9 @@ const Caracteristiques = () => {
                 setTypes(type1, type2, res.data);
 
                 // Set moves for the current pokemon
-                let keys = new Array();
-                let values = new Array();
+                let keys = [];
+                let values = [];
+                
                 res.data.moves.forEach((element) => {
                     keys.push(element.move.name);
                     values.push(element.move.url);
@@ -68,6 +103,23 @@ const Caracteristiques = () => {
                 }
 
                 tableMoves.current = setTable(moves.current);
+
+                let arrayFav = sessionStorage.getItem('store').split(";");
+                let choiced = false;
+                if(sessionStorage.getItem('store') == "") {selected.current = add;}
+                arrayFav.forEach(element => {
+                    if(element != "" && !choiced) {
+                        if(element == res.data.name) {
+                            selected.current = added;
+                            choiced = true;
+                        }
+                        else {
+                            selected.current = add;
+                        }
+                    }
+                });
+
+
             })
     }, []);
 
@@ -85,6 +137,7 @@ const Caracteristiques = () => {
                 <div className="Base">
                     <img className="Poke-art_carac" src={url} alt={altName} />
                     <h1>{data.name}</h1>
+                    <img src={selected.current} onClick={changeImg} height="30px" className="imgFav"></img>
                 </div>
 
                 <div className="Caracteristiques">
@@ -103,8 +156,9 @@ const Caracteristiques = () => {
                     </div>
                 </div>
             </div>
-            <div className="Moves">
-                <h4>{tableMoves.current}</h4>
+            <div className="MovesContent">
+                <h1>Moves</h1>
+                {tableMoves.current}
             </div>
         </div>
     );
@@ -112,23 +166,22 @@ const Caracteristiques = () => {
 
 function setTable(moves) {
 
-    let names = new Array();
+    let names = [];
 
-    for (const [key, value] of moves.entries()){
+    for (const [key] of moves.entries()){
         names.push(key['name']);
     }
 
     return(
-        <div>
-            <h1>Moves</h1>
-            {names.map((move) => <h3>{move}</h3>)}
+        <div className="Moves">
+            {names.map((move) => <a className="App-link" href={"move/"+move}><h3>{move}</h3></a>)}
         </div>
     )
 }
 
 function setTypes(type1, type2, data) {
     data.types.forEach((element) => {
-        if(type1.current == undefined) {
+        if(type1.current === undefined) {
             chooseType(type1, element);
         }
         else {

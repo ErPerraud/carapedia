@@ -52,24 +52,21 @@ body {
   border-radius: 70px;
 }
 
-.Moves {
+.moves {
   display: grid;
+  text-align: center;
+  margin-top: 5%;
+  padding: 0% 5% 5% 5%;
+  background-color: #252555;
+  border-radius: 70px;
   grid-template-columns: repeat(5, 1fr);
 }
 
-.Moves h3 {
+.moves h3 {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
   width: 100%;
-  transition-duration: 100ms;
-}
-
-.Moves h3:hover {
-  position: relative;
-  height: 110%;
-  width: 110%;
-  background-color: #2525A5;
   transition-duration: 100ms;
 }
